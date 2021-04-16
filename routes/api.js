@@ -6,9 +6,22 @@ const { Workout } = require("../models");
 // API routes
 // =============================================================
 // Get all workouts
-router.get("/api/workout", (req, res) => {
+router.get("/api/workouts", async (req, res) => {
     try {
-        Workout.find({})
+        await Workout.find({})
+            .sort({ date: -1 })
+            .then(dbWorkout => {
+                res.json(dbWorkout);
+            })
+    } catch (err) {
+        res.status(400).json(err);
+    }
+});
+
+// Get all workouts in range?
+router.get("/api/workouts/range", async (req, res) => {
+    try {
+        await Workout.find({})
             .sort({ date: -1 })
             .then(dbWorkout => {
                 res.json(dbWorkout);
@@ -19,9 +32,9 @@ router.get("/api/workout", (req, res) => {
 });
 
 // Create a new workout
-router.post("/api/workout", (req, res) => {
+router.post("/api/workouts", async (req, res) => {
     try {
-        Workout.create(req.body)
+        await Workout.create(req.body)
             .then(dbWorkout => {
                 res.json(dbWorkout);
             })
@@ -31,11 +44,11 @@ router.post("/api/workout", (req, res) => {
 });
 
 // Update a workout
-router.put("/api/workout/:id", (req, res) => {
+router.put("/api/workouts/:id", async (req, res) => {
     try {
         const id = req.params.id;
         const body = req.body;
-        Workout.updateOne(
+        await Workout.updateOne(
             { id: id },
             {
                 $push: {
