@@ -2,7 +2,6 @@
 // =============================================================
 const router = require("express").Router();
 const path = require('path');
-const { User, Exercises, Plans } = require('../models');
 
 // HTML routes
 // =============================================================
@@ -31,7 +30,7 @@ router.get("/stats", (req, res) => {
     }
 });
 
-// Home Page route
+// Home Page re-route
 // =============================================================
 // Redirect non-specified pages to home
 router.get("*", (req, res) => {

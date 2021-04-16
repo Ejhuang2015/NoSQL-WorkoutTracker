@@ -1,9 +1,15 @@
+// Dependencies
+// =============================================================
 const router = require('express').Router();
 
 const homeRoutes = require('./homeRoutes');
 const apiRoutes = require('./api');
 
+// Routes
+// =============================================================
 router.use('/', homeRoutes);
 router.use('/api', apiRoutes);
 
+// Export
+// =============================================================
 module.exports = router;

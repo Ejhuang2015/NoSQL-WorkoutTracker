@@ -1,5 +1,7 @@
-module.exports = {
-    Exercise: require("./Exercises"),
-    Plan: require("./Plans"),
-    User: require("./User")
-  };
+  // Dependencies
+// =============================================================
+const Workout = require('./workout');
+
+// Export
+// =============================================================
+module.exports = { Workout };

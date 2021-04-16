@@ -1,11 +1,16 @@
+// Dependencies
+// =============================================================
 let mongoose = require("mongoose");
 let db = require("../models");
+require('dotenv').config();
 
-mongoose.connect("mongodb://localhost/workout", {
+mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/workout", {
   useNewUrlParser: true,
   useFindAndModify: false
 });
 
+// Seed
+// =============================================================
 let workoutSeed = [
   {
     day: new Date().setDate(new Date().getDate()-10),
@@ -124,6 +129,8 @@ let workoutSeed = [
   }
 ];
 
+// Start seed
+// =============================================================
 db.Workout.deleteMany({})
   .then(() => db.Workout.collection.insertMany(workoutSeed))
   .then(data => {
