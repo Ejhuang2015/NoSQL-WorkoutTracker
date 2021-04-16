@@ -1,7 +1,5 @@
-  // Dependencies
-// =============================================================
-const Workout = require('./workout');
-
 // Export
 // =============================================================
-module.exports = { Workout };
+module.exports = {
+    Workout: require("./Workout")
+};
