@@ -30,17 +30,6 @@ router.get("/stats", (req, res) => {
     }
 });
 
-// Home Page re-route
-// =============================================================
-// Redirect non-specified pages to home
-router.get("*", (req, res) => {
-    try {
-        res.sendFile(path.join(__dirname, '../public/index.html'));
-    } catch (err) {
-        res.status(500).end();
-    }
-});
-
 // Exports
 // =============================================================
 module.exports = router;

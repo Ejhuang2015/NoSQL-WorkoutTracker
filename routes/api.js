@@ -27,7 +27,6 @@ router.get("/workouts/range", (req, res) => {
         });
 });
 
-
 // Create a new workout
 router.post("/workouts", (req, res) => {
     Workout.create(req.body)
