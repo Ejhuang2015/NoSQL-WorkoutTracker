@@ -1,14 +1,14 @@
 // Dependencies
 // =============================================================
 const router = require("express").Router();
-const db = require("../models");
+const { Workout } = require("../models");
 
 // API routes
 // =============================================================
 // Get last workout
-router.get("/api/workouts", (req, res) => {
-    db.Workout.find({})
-        .then(dbWorkout => {
+router.get("/workouts", (req, res) => {
+    Workout.find({})
+        .then((dbWorkout) => {
             res.json(dbWorkout);
         })
         .catch((err) => {
@@ -18,8 +18,8 @@ router.get("/api/workouts", (req, res) => {
 
 // Get all workouts
 router.get("/workouts/range", (req, res) => {
-    db.Workout.find({})
-        .then(dbWorkout => {
+    Workout.find({})
+        .then((dbWorkout) => {
             res.json(dbWorkout);
         })
         .catch((err) => {
@@ -30,24 +30,24 @@ router.get("/workouts/range", (req, res) => {
 
 // Create a new workout
 router.post("/workouts", (req, res) => {
-    db.Workout.create(req.body)
-        .then(dbWorkout => {
-            console.log(dbWorkout);
-            res.json(dbWorkout);
+    Workout.create(req.body)
+        .then((newWorkout) => {
+            res.json(newWorkout);
         })
-        .catch(err => {
+        .catch((err) => {
             res.status(400).json(err);
         });
 });
 
 // Update a workout
-router.put("/api/workouts/:id", (req, res) => {
-    db.Workout.findByIdAndUpdate(
+router.put("/workouts/:id", (req, res) => {
+    Workout.findByIdAndUpdate(
         req.params.id,
-        { $push: { exercises: req.body } }
+        { $push: { exercises: req.body } },
+        { new: true }
     )
-        .then((dbWorkout) => {
-            res.json(dbWorkout)
+        .then((editWorkout) => {
+            res.json(editWorkout)
         })
         .catch((err) => {
             res.status(400).json(err);
